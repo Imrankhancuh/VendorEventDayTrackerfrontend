@@ -13,7 +13,7 @@ export default function CloseEvent() {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:5000/api/close", { otp });
+      await axios.post("https://minivendoreventdaytrackerbackend-2.onrender.com/api/close", { otp });
 
       // ✅ SUCCESS → redirect to Thank You page
       nav("/thank-you");

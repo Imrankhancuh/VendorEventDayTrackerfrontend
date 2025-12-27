@@ -8,7 +8,6 @@ export default function CheckIn() {
   const [location, setLocation] = useState(null);
   const [timestamp, setTimestamp] = useState(null);
   const [vendor, setVendor] = useState(null);
-  const [error, setError] = useState("");   // ✅ NEW
   const nav = useNavigate();
 
   // 🔐 Mock authentication
@@ -36,26 +35,26 @@ export default function CheckIn() {
     return () => clearInterval(interval);
   }, []);
 
+  // ✅ UPDATED: exact try-catch logic added
   const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+
+    const form = new FormData();
+    form.append("vendor", vendor);
+    form.append("photo", e.target.photo.files[0]);
+    form.append("lat", location.lat);
+    form.append("lng", location.lng);
+    form.append("timestamp", timestamp.toISOString());
 
     try {
-      const form = new FormData();
-      form.append("vendor", vendor);
-      form.append("photo", e.target.photo.files[0]);
-      form.append("lat", location.lat);
-      form.append("lng", location.lng);
-      form.append("timestamp", timestamp.toISOString());
-
       await api.post("/checkin", form);
-
       setCheckedIn(true);
     } catch (err) {
-      // ✅ BACKEND OFF MESSAGE ONLY
       if (!err.response) {
-        setError("Backend is not connected. Please start the server.");
+        alert("Backend is not connected. Please start the server.");
+      } else {
+        alert("Server error. Try again.");
       }
     } finally {
       setLoading(false);
@@ -103,8 +102,6 @@ export default function CheckIn() {
           <small className="hint">
             Please capture a clear photo of the event location
           </small>
-
-          {error && <p className="error">{error}</p>} {/* ✅ SHOW MESSAGE */}
 
           <button disabled={loading || !location || !timestamp}>
             {loading ? "Checking In..." : "Check In"}
