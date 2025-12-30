@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://minivendoreventdaytrackerbackend-2.onrender.com/api",
+  baseURL: "https://minivendoreventdaytrackerupdatebackend.onrender.com/api",
   timeout: 10000
 });
 
 // Global response interceptor
 api.interceptors.response.use(
-  (res) => res,
+  (res) => res, 
   (err) => {
     if (!err.response) {
       err.message = "Backend is not connected. Please start the server.";

@@ -1,50 +1,43 @@
 import axios from "axios";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function CloseEvent() {
-  const [otp, setOtp] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const nav = useNavigate();
+const BASE_URL = "https://minivendoreventdaytrackerupdatebackend.onrender.com/api";
 
-  const close = async () => {
-    setError("");
-    setLoading(true);
+export default function CloseEvent() {
+  const nav = useNavigate();
+  const mobile = localStorage.getItem("mobile"); 
+
+  const sendOtp = async () => {
+    if (!mobile) {
+      alert("Mobile number not found. Please login again.");
+      return;
+    }
 
     try {
-      await axios.post("https://minivendoreventdaytrackerbackend-2.onrender.com/api/close", { otp });
-
-      // ✅ SUCCESS → redirect to Thank You page
-      nav("/thank-you");
+      // ✅ Correct endpoint matches backend: /api/close
+      const response = await axios.post(`${BASE_URL}/close`, { mobile });
+      
+      if (response.data.success) {
+        alert("Close OTP sent! Check backend terminal.");
+        // Go to next page for entering OTP
+        nav("/close-otp");
+      } else {
+        alert("Failed to send OTP: " + (response.data.message || ""));
+      }
 
     } catch (err) {
-      if (err.response && err.response.status === 400) {
-        setError(err.response.data.message || "Invalid OTP");
-      } else {
-        setError("Server error. Try again later.");
-      }
-    } finally {
-      setLoading(false);
+      console.error(err);
+      alert("Failed to send OTP. See console for details.");
     }
   };
 
   return (
     <div className="card">
-      <p className="step">Step 4 of 4: Close Event</p>
+      <p className="step">Step 4 of 4</p>
       <h2>Close Event</h2>
 
-      <input
-        type="text"
-        placeholder="Enter final OTP"
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
-      />
-
-      {error && <p className="error">{error}</p>}
-
-      <button onClick={close} disabled={loading || !otp}>
-        {loading ? "Verifying..." : "Close Event"}
+      <button onClick={sendOtp}>
+        Send Close OTP
       </button>
     </div>
   );

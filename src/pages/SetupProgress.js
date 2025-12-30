@@ -10,19 +10,23 @@ export default function SetupProgress() {
   const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+ 
     const form = new FormData();
 
-    // 🟢 Pre-setup
+    // 🟢 Pre-setup (optional)
     form.append("preNotes", e.target.preNotes.value);
-    for (let file of e.target.prePhotos.files) {
-      form.append("prePhotos", file);
+    if (e.target.prePhotos.files.length > 0) {
+      for (let file of e.target.prePhotos.files) {
+        form.append("prePhotos", file);
+      }
     }
 
-    // 🔵 Post-setup
+    // 🔵 Post-setup (optional)
     form.append("postNotes", e.target.postNotes.value);
-    for (let file of e.target.postPhotos.files) {
-      form.append("postPhotos", file);
+    if (e.target.postPhotos.files.length > 0) {
+      for (let file of e.target.postPhotos.files) {
+        form.append("postPhotos", file);
+      }
     }
 
     try {
@@ -42,15 +46,14 @@ export default function SetupProgress() {
       {!submitted ? (
         <form onSubmit={submit}>
 
-          {/* 🟢 PRE-SETUP */}
+          {/* 🟢 PRE-SETUP (optional) */}
           <h3>Pre-Setup</h3>
 
-          <label>Upload pre-setup photos</label>
+          <label>Upload pre-setup photos (optional)</label>
           <input
             type="file"
             name="prePhotos"
             multiple
-            required
           />
 
           <textarea
@@ -60,15 +63,14 @@ export default function SetupProgress() {
 
           <hr />
 
-          {/* 🔵 POST-SETUP */}
+          {/* 🔵 POST-SETUP (optional) */}
           <h3>Post-Setup</h3>
 
-          <label>Upload post-setup photos</label>
+          <label>Upload post-setup photos (optional)</label>
           <input
             type="file"
             name="postPhotos"
             multiple
-            required
           />
 
           <textarea
