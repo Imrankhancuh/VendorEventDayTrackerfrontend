@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://minivendoreventdaytrackerupdatebackend.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api"; 
 
 export default function CloseOtpVerify() {
   const [otp, setOtp] = useState("");
@@ -11,7 +11,7 @@ export default function CloseOtpVerify() {
   const nav = useNavigate(); 
 
   const mobile = localStorage.getItem("mobile");
-
+ 
   const verifyOtp = async () => {
     setError("");
     setLoading(true);

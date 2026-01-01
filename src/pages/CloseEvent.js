@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://minivendoreventdaytrackerupdatebackend.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 export default function CloseEvent() {
   const nav = useNavigate();
