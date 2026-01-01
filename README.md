@@ -1,3 +1,27 @@
+Vender Event Day Tracker Project Description - 
+
+1. In this project Frist User put the name and number then mocked otp is generated and after put the otp. 
+
+2. User can view the page where take the real time latitude and langitude with timestemp and also capture the real time photo.
+
+3. after user processed the button then again otp is generated then user put the otp goes to the next page.
+
+4. where user seen the page where user upload the pre steup event photo with prenotes optional and also upload post setup event photo and after click the submit button then goes to close and verify event then user put the close and verify otp then user can go the final Event page and submit then redirect of the login page.
+
+5. All data stored in Mongodbatlas database.
+
+Real world Use - This project benefit for Vender event day tracker where vender take the all the information and send to the User like - 
+
+1. Wedding planners
+2. Concert organizers
+3. Corporate event managers
+
+This project I have use technology like - 
+
+Reactjs 
+nodejs 
+mongodb atlas database.
+
 <<<<<<< HEAD
 # Getting Started with Create React App
 
