@@ -1,3 +1,11 @@
+Vender Event Day Tracker Project structure - 
+
+1. login page with mocked otp verification.
+2. Capture real time photo camera and also capture the langitude, latitude with timestemp.
+3. Upload Pre steup events photo with prenotes and upload post steup events photo with postnotes.
+4. Collect final customer mocked OTP to confirm event completion.
+5. All data stored in mongodb atlas database.
+
 Vender Event Day Tracker Project Description - 
 
 1. In this project Frist User put the name and number then mocked otp is generated and after put the otp. 
